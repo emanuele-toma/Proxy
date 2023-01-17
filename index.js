@@ -32,10 +32,10 @@ server.on('upgrade', function (req, socket, head) {
     var path = paths[subdomain];
 
     if (path)
-        apiProxy.ws(req, socket, head, { target: path });
+        apiProxy.ws(req, socket, head, { target: path + req.originalUrl });
 
     if (!path)
-        apiProxy.ws(req, socket, head, { target: paths.__root__ });
+        apiProxy.ws(req, socket, head, { target: paths.__root__ + req.originalUrl});
 });
 
 server.on('listening', function () {
