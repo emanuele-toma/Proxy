@@ -15,19 +15,25 @@ app.use('*', function (req, res) {
     var host = req.headers.host;
     var subdomain = host.split('.')[0];
     var path = paths[subdomain];
-    if (path) {
+    if (path)
         apiProxy.web(req, res, { target: path });
-    }
 
-    if (!path) {
+    if (!path)
         apiProxy.web(req, res, { target: paths.__root__ });
-    }
 });
 
 var server = require('http').createServer(app);
 
 server.on('upgrade', function (req, socket, head) {
-    apiProxy.ws(req, socket, head, { target: frontend });
+    var host = req.headers.host;
+    var subdomain = host.split('.')[0];
+    var path = paths[subdomain];
+
+    if (path)
+        apiProxy.ws(req, socket, head, { target: path });
+
+    if (!path)
+        apiProxy.ws(req, socket, head, { target: paths.__root__ });
 });
 
 server.on('listening', function () {
