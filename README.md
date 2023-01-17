@@ -4,7 +4,7 @@ This is a simple Node.js application that uses a proxy to redirect requests base
 
 ## How it works
 
-The application uses the express and http-proxy modules to handle HTTP requests. The app.use() method handles all types of HTTP requests for any route. It uses the req.headers.host property to get the subdomain from the request's hostname. The subdomain is then used to match the path in the paths object, where the key is the subdomain and the value is the target URL. If the subdomain is found in the paths object, the request is proxied to the target URL, otherwise, it is proxied to the default path (paths.root).
+The application uses the `express` and `http-proxy` modules to handle HTTP requests. The `app.use()` method handles all types of HTTP requests for any route. It uses the `req.headers.host` property to get the subdomain from the request's hostname. The subdomain is then used to match the path in the `paths` object, where the key is the subdomain and the value is the target URL. If the subdomain is found in the `paths` object, the request is proxied to the target URL, otherwise, it is proxied to the default path (paths.\_\_root\_\_).
 
 The server also listen to the 'upgrade' event to handle WebSocket connections.
 
@@ -13,7 +13,7 @@ The server also listen to the 'upgrade' event to handle WebSocket connections.
 You can configure the target URLs for each subdomain in the paths object, in this case the key is the subdomain and the value is the target URL.
 
 You can change the port of the server by modifying the last line of the code
-server.listen(80);
+`server.listen(80);`
 
 ## Dependencies
 
