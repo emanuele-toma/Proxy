@@ -17,7 +17,7 @@ app.use('*', function (req, res) {
     var path = paths[subdomain];
     
     if (req.hostname != "localhost" && req.hostname != "127.0.0.1" && !req.hostname.includes("tomaemanuele.it")) {
-        res.status(401).send("Not Authorized");
+        res.status(401).send("Unauthorized");
         return;
     }
 
