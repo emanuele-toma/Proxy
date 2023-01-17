@@ -17,10 +17,10 @@ app.use('*', function (req, res) {
     var path = paths[subdomain];
     
     if (path)
-        apiProxy.web(req, res, { target: path + req.originalUrl });
+        apiProxy.web(req, res, { target: path + req.originalUrl, ignorePath: true });
     
     if (!path)
-        apiProxy.web(req, res, { target: paths.__root__ + req.originalUrl });
+        apiProxy.web(req, res, { target: paths.__root__ + req.originalUrl, ignorePath: true });
 
 });
 
@@ -32,10 +32,10 @@ server.on('upgrade', function (req, socket, head) {
     var path = paths[subdomain];
 
     if (path)
-        apiProxy.ws(req, socket, head, { target: path + req.originalUrl });
+        apiProxy.ws(req, socket, head, { target: path + req.originalUrl, ws: true, ignorePath: true });
 
     if (!path)
-        apiProxy.ws(req, socket, head, { target: paths.__root__ + req.originalUrl});
+        apiProxy.ws(req, socket, head, { target: paths.__root__ + req.originalUrl, ws: true, ignorePath: true });
 });
 
 server.on('listening', function () {
