@@ -1,4 +1,4 @@
-# Subdomain-Proxy
+# SubdomainProxy
 
 This is a simple Node.js application that uses a proxy to redirect requests based on the subdomain to a certain port on the same server.
 
@@ -23,7 +23,7 @@ You can change the port of the server by modifying the last line of the code
 ## Usage
 
 1. Make sure you have Node.js and npm installed on your machine.
-2. Clone the repository: `git clone https://github.com/emanuele-toma/Subdomain-Proxy.git`
+2. Clone the repository: `git clone https://github.com/emanuele-toma/SubdomainProxy.git`
 3. Install the dependencies: `npm install`
 4. Start the server: `node index.js`
 5. Make requests to your server specifying the subdomain you configured in the `paths` object.
