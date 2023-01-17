@@ -16,6 +16,11 @@ app.use('*', function (req, res) {
     var subdomain = host.split('.')[0];
     var path = paths[subdomain];
     
+    if (req.hostname != "localhost" && req.hostname != "127.0.0.1" && !req.hostname.includes("tomaemanuele.it")) {
+        res.status(401).send("Not Authorized");
+        return;
+    }
+
     if (path)
         apiProxy.web(req, res, { target: path + req.originalUrl, ignorePath: true });
     
