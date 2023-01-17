@@ -15,11 +15,13 @@ app.use('*', function (req, res) {
     var host = req.headers.host;
     var subdomain = host.split('.')[0];
     var path = paths[subdomain];
+    
     if (path)
-        apiProxy.web(req, res, { target: path });
-
+        apiProxy.web(req, res, { target: path + req.originalUrl });
+    
     if (!path)
-        apiProxy.web(req, res, { target: paths.__root__ });
+        apiProxy.web(req, res, { target: paths.__root__ + req.originalUrl });
+
 });
 
 var server = require('http').createServer(app);
