@@ -47,14 +47,11 @@ server.on('listening', function () {
     console.log('Listening on port: %d', server.address().port);
 });
 
-server.on('error', function (err) {
+process.on('uncaughtException', function (err) {
+    // if error is ECONNREFUSED, it means that the server is not running on the port we are trying to connect to so we can safely ignore it
     if (err.code !== 'ECONNREFUSED') {
         console.log(err);
     }
-});
-
-process.on('uncaughtException', function (err) {
-    console.log(err);
 });
 
 server.listen(80);
