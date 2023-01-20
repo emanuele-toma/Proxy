@@ -47,4 +47,12 @@ server.on('listening', function () {
     console.log('Listening on port: %d', server.address().port);
 });
 
+server.on('error', function (err) {
+    console.log(err);
+});
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+});
+
 server.listen(80);
