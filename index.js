@@ -48,7 +48,9 @@ server.on('listening', function () {
 });
 
 server.on('error', function (err) {
-    console.log(err);
+    if (err.code !== 'ECONNREFUSED') {
+        console.log(err);
+    }
 });
 
 process.on('uncaughtException', function (err) {
