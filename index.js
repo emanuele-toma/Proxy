@@ -16,6 +16,10 @@ const redirects =
 
 app.use('*', function (req, res) {
     var host = req.headers.host;
+
+    if (!host)
+        return res.status(404).send("Not found");
+
     var subdomain = host.split('.')[0];
     var path = paths[subdomain] || paths.__root__;
 
@@ -48,6 +52,10 @@ var server = require('http').createServer(app);
 
 server.on('upgrade', function (req, socket, head) {
     var host = req.headers.host;
+
+    if (!host)
+        return res.status(404).send("Not found");
+
     var subdomain = host.split('.')[0];
     var path = paths[subdomain] || paths.__root__;
 
