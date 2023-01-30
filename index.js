@@ -20,12 +20,14 @@ app.use('*', function (req, res) {
     if (!host)
         return res.status(404).send("Not found");
 
-    var subdomain = host.split('.')[0];
+    var subdomain = host.split('.').length > 2 ? host.split('.')[0] : "__root__";
     var path = paths[subdomain] || paths.__root__;
 
     if (redirects[subdomain])
     {
-        res.redirect(301, req.protocol + '://' + redirects[subdomain] + '.' + req.hostname + req.originalUrl);
+        const newSubdomain = redirects[subdomain];
+        const cleanHostname = subdomain == "__root__" ? req.hostname : req.hostname.split('.').slice(1).join('.');
+        res.redirect(301, req.protocol + '://' + newSubdomain + '.' + cleanHostname + req.originalUrl);
         return;
     }
 
@@ -56,12 +58,14 @@ server.on('upgrade', function (req, socket, head) {
     if (!host)
         return res.status(404).send("Not found");
 
-    var subdomain = host.split('.')[0];
+    var subdomain = host.split('.').length > 2 ? host.split('.')[0] : "__root__";
     var path = paths[subdomain] || paths.__root__;
 
     if (redirects[subdomain])
     {
-        res.redirect(301, req.protocol + '://' + redirects[subdomain] + '.' + req.hostname + req.originalUrl);
+        const newSubdomain = redirects[subdomain];
+        const cleanHostname = subdomain == "__root__" ? req.hostname : req.hostname.split('.').slice(1).join('.');
+        res.redirect(301, req.protocol + '://' + newSubdomain + '.' + cleanHostname + req.originalUrl);
         return;
     }
 
